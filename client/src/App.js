@@ -11,10 +11,15 @@ import AdminPage from "./components/adminPage.jsx";
 import AdminNav from "./layouts/adminNav.jsx";
 import Analyse from "./components/analyse.jsx";
 import UserNav from "./layouts/userNav.jsx";
-import NewNav from "./layouts/newNav.jsx";
+import Nav from "./layouts/newNav.jsx";
+import Test from "./components/contextTest.jsx";
+import { Context } from "./components/contextBidou.js";
+
+export const MyContext = React.createContext();
 
 const App = () => {
   let [view, setView] = useState("home");
+  let [test, setTest] = useState("hello world");
 
   let changeView = (view) => {
     setView(view);
@@ -22,25 +27,28 @@ const App = () => {
 
   return (
     <>
-      <UserNav />
-      {view.includes("admin") ? (
-        <AdminNav view={view} changeView={changeView} />
-      ) : (
-        <NavBar view={view} changeView={changeView} />
-      )}
-      {view === "home" && <Home />}
-      {view === "login" && <LogIn changeView={changeView} />}
-      {view === "adminLogIn" && (
-        <AdminAuth changeView={changeView} view={view} />
-      )}
-      {view === "admin add" && <AddUser />}
-      {view === "admin page" && (
-        <AdminPage changeView={changeView} view={view} />
-      )}
+      <MyContext.Provider value={test}>
+        {/* <Nav /> */}
+        <Test />
+        {view.includes("admin") ? (
+          <AdminNav view={view} changeView={changeView} />
+        ) : (
+          <NavBar view={view} changeView={changeView} />
+        )}
+        {view === "home" && <Home />}
+        {view === "login" && <LogIn changeView={changeView} />}
+        {view === "adminLogIn" && (
+          <AdminAuth changeView={changeView} view={view} />
+        )}
+        {view === "admin add" && <AddUser />}
+        {view === "admin page" && (
+          <AdminPage changeView={changeView} view={view} />
+        )}
 
-      {view === "analyse" && <Analyse />}
+        {view === "analyse" && <Analyse />}
 
-      <Footer changeView={changeView} />
+        <Footer changeView={changeView} />
+      </MyContext.Provider>
     </>
   );
 };
