@@ -11,6 +11,7 @@ import AdminPage from "./components/adminPage.jsx";
 import AdminNav from "./layouts/adminNav.jsx";
 import Analyse from "./components/analyse.jsx";
 import UserNav from "./layouts/userNav.jsx";
+import NewNav from "./layouts/newNav.jsx";
 
 const App = () => {
   let [view, setView] = useState("home");
@@ -21,6 +22,7 @@ const App = () => {
 
   return (
     <>
+      <UserNav />
       {view.includes("admin") ? (
         <AdminNav view={view} changeView={changeView} />
       ) : (
