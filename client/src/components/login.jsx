@@ -1,5 +1,6 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useContext, useEffect } from "react";
+import { Context } from "./contextBidou";
 
 const LogIn = (props) => {
   const [email, setEmail] = useState("");
@@ -7,6 +8,13 @@ const LogIn = (props) => {
   const [currentUser, setCurrentUser] = useState("");
   const [role, setRole] = useState("");
   const [pass, setPass] = useState(true);
+
+  let user = useContext(Context);
+
+  console.log(user, "you");
+  // useEffect(() => {
+  // }, []);
+  // console.log(user.setUserValue(), "which is which");
   let getData = (role) => {
     setRole(role);
     axios
@@ -14,9 +22,10 @@ const LogIn = (props) => {
         params: { email, password, role },
       })
       .then((result) => {
+        // trying.setUserValue("string");
+        user.setUserValue("result");
         console.log(result.data, "fetched");
         // console.log(role, "el rolo ");
-
         setCurrentUser(result.data);
         console.log("el currento utilisatoré ", currentUser);
       });

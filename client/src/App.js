@@ -27,28 +27,28 @@ const App = () => {
 
   return (
     <>
-      <MyContext.Provider value={test}>
-        {/* <Nav /> */}
-        <Test />
-        {view.includes("admin") ? (
-          <AdminNav view={view} changeView={changeView} />
-        ) : (
-          <NavBar view={view} changeView={changeView} />
-        )}
-        {view === "home" && <Home />}
-        {view === "login" && <LogIn changeView={changeView} />}
-        {view === "adminLogIn" && (
-          <AdminAuth changeView={changeView} view={view} />
-        )}
-        {view === "admin add" && <AddUser />}
-        {view === "admin page" && (
-          <AdminPage changeView={changeView} view={view} />
-        )}
+      {/* <MyContext.Provider value={test}> */}
+      {/* <Nav /> */}
+      <Test />
+      {view.includes("admin") ? (
+        <AdminNav view={view} changeView={changeView} />
+      ) : (
+        <NavBar view={view} changeView={changeView} />
+      )}
+      {view === "home" && <Home />}
+      {view === "login" && <LogIn changeView={changeView} />}
+      {view === "adminLogIn" && (
+        <AdminAuth changeView={changeView} view={view} />
+      )}
+      {view === "admin add" && <AddUser />}
+      {view === "admin page" && (
+        <AdminPage changeView={changeView} view={view} />
+      )}
 
-        {view === "analyse" && <Analyse />}
+      {view === "analyse" && <Analyse />}
 
-        <Footer changeView={changeView} />
-      </MyContext.Provider>
+      <Footer changeView={changeView} />
+      {/* </MyContext.Provider> */}
     </>
   );
 };

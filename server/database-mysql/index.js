@@ -1,3 +1,5 @@
+const { Promise } = require("bluebird");
+const { append } = require("express/lib/response");
 const mysql = require("mysql");
 
 var connection = mysql.createConnection({
@@ -7,9 +9,9 @@ var connection = mysql.createConnection({
   database: "milk",
 });
 
-// const db = Promise.promisifyAll(connection, { multiArgs: true });
+const db = Promise.promisifyAll(connection, { multiArgs: true });
 
-const con = connection.connect(function (err) {
+connection.connect(function (err) {
   if (err) {
     return console.error("error: " + err.message);
   }
@@ -17,7 +19,7 @@ const con = connection.connect(function (err) {
 });
 
 let adminLogIn = () => {
-  return con
+  return db
     .queryAsync(`SELECT * FROM admin`)
     .then((response) => {
       return response[0];
@@ -26,7 +28,7 @@ let adminLogIn = () => {
 };
 
 let addAdmin = () => {
-  return con
+  return db
     .queryAsync(
       `INSERT INTO admin (firstname, lastname, email, password) VALUES ('noura', 'noura', 'noura@gmail.com', 'azerty')`
     )
@@ -36,7 +38,7 @@ let addAdmin = () => {
 
 let createUser = (req, pass) => {
   // console.log(req.body);
-  return con
+  return db
     .queryAsync(
       `INSERT INTO ${req.body.role} (firstname, lastname, email, image, phonenumber, adress, password) VALUES ('${req.body.name}', '${req.body.last}', '${req.body.email}', '${req.body.photo}', ${req.body.phone}, '${req.body.adress}', '${pass}')`
     )
@@ -45,8 +47,8 @@ let createUser = (req, pass) => {
 };
 
 let userLogIn = (req, res) => {
-  console.log(req.query, "request here");
-  return con
+  // console.log(req.query, "request here");
+  return db
     .queryAsync(
       `SELECT * FROM ${req.query.role} WHERE email = '${req.query.email}'`
     )
