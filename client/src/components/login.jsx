@@ -23,7 +23,7 @@ const LogIn = (props) => {
       })
       .then((result) => {
         // trying.setUserValue("string");
-        user.setUserValue("result");
+        user.setUserValue(result.data);
         console.log(result.data, "fetched");
         // console.log(role, "el rolo ");
         setCurrentUser(result.data);
@@ -32,6 +32,7 @@ const LogIn = (props) => {
   };
   let login = () => {
     if (currentUser.email === email && currentUser.password === password) {
+      console.log(user, "after");
       props.changeView(role);
       console.log("sucess");
     } else {
