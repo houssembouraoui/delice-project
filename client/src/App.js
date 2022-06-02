@@ -14,6 +14,7 @@ import UserNav from "./layouts/userNav.jsx";
 import Nav from "./layouts/newNav.jsx";
 import Test from "./components/contextTest.jsx";
 import { Context } from "./components/contextBidou.js";
+import Header from "./components/header/header.jsx"; 
 
 export const MyContext = React.createContext();
 
@@ -28,7 +29,8 @@ const App = () => {
   return (
     <>
       <MyContext.Provider value={test}>
-        {/* <Nav /> */}
+        <Header />
+        {/* <Nav />
         <Test />
         {view.includes("admin") ? (
           <AdminNav view={view} changeView={changeView} />
@@ -47,7 +49,7 @@ const App = () => {
 
         {view === "analyse" && <Analyse />}
 
-        <Footer changeView={changeView} />
+        <Footer changeView={changeView} /> */}
       </MyContext.Provider>
     </>
   );
