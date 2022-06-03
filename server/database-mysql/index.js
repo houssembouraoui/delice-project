@@ -29,9 +29,7 @@ let adminLogIn = () => {
 
 let addAdmin = () => {
   return db
-    .queryAsync(
-      `INSERT INTO admin (firstname, lastname, email, password) VALUES ('noura', 'noura', 'noura@gmail.com', 'azerty')`
-    )
+    .queryAsync()
     .then((res) => console.log(res))
     .catch((err) => console.log(err));
 };
@@ -53,9 +51,21 @@ let userLogIn = (req, res) => {
       `SELECT * FROM ${req.query.role} WHERE email = '${req.query.email}'`
     )
     .then((response) => {
-      console.log(response[0], "response from the database");
       return response[0];
     });
 };
 
-module.exports = { connection, adminLogIn, createUser, addAdmin, userLogIn };
+let getFournissurs = (req, res) => {
+  return db.queryAsync(`SELECT * FROM fournisseur`).then((response) => {
+    return response[0];
+  });
+};
+
+module.exports = {
+  connection,
+  adminLogIn,
+  createUser,
+  addAdmin,
+  userLogIn,
+  getFournissurs,
+};

@@ -80,6 +80,13 @@ app.post("/add/admin", (req, res) => {
     .catch((err) => console.log("el fail"));
 });
 
+app.get("/fetch/fournisseurs", (req, res) => {
+  connection
+    .getFournissurs()
+    .then((result) => res.send(result))
+    .catch((err) => console.log(err));
+});
+
 app.listen(port, () => {
   console.log(`app listening at http://localhost:${port}`);
 });
