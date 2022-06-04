@@ -4,6 +4,9 @@ const port = 5000;
 const path = require("path");
 const crypto = require("crypto");
 
+const cors = require("cors");
+app.use(cors());
+
 var connection = require("./database-mysql/index.js");
 const { adminLogIn } = require("./database-mysql/index.js");
 
@@ -34,6 +37,13 @@ app.get("/test", (request, response) => {
   response.send("hello world");
 });
 
+app.delete("/delete/fournisseur/:id", (req, res) => {
+  connection
+    .DeleteFr(req.params.id)
+    .then((res) => res.send(res))
+    .catch((err) => err);
+});
+
 app.get("/user/login", (req, res) => {
   // let recieved = req.query;
   connection.userLogIn(req, res).then((result) => {
@@ -53,7 +63,6 @@ app.post("/new/user", (req, res) => {
     your default password is ${password}`,
   };
 
-  console.log(req.body);
   connection
     .createUser(req, password)
     .then((result) => {
@@ -78,6 +87,13 @@ app.post("/add/admin", (req, res) => {
     .addAdmin()
     .then((res) => console.log(res))
     .catch((err) => console.log("el fail"));
+});
+
+app.get("/fetch/fournisseurs", (req, res) => {
+  connection
+    .getFournissurs()
+    .then((result) => res.send(result))
+    .catch((err) => console.log(err));
 });
 
 app.listen(port, () => {

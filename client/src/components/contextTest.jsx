@@ -4,6 +4,7 @@ import { Context } from "./contextBidou";
 
 const Test = () => {
   const test = useContext(Context);
+  console.log(test);
 
   return <>{}</>;
 };

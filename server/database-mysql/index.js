@@ -30,9 +30,7 @@ let adminLogIn = () => {
 
 let addAdmin = () => {
   return db
-    .queryAsync(
-      `INSERT INTO admin (firstname, lastname, email, password) VALUES ('noura', 'noura', 'noura@gmail.com', 'azerty')`
-    )
+    .queryAsync()
     .then((res) => console.log(res))
     .catch((err) => console.log(err));
 };
@@ -54,7 +52,6 @@ let userLogIn = (req, res) => {
       `SELECT * FROM ${req.query.role} WHERE email = '${req.query.email}'`
     )
     .then((response) => {
-      console.log(response[0], "response from the database");
       return response[0];
     });
 };
@@ -67,4 +64,24 @@ let selectVendorSummaryListe = (req, res) => {
   ).catch((err) => console.log(err))
 }
 
-module.exports = { connection, adminLogIn, createUser, addAdmin, userLogIn, selectVendorSummaryListe };
+let getFournissurs = (req, res) => {
+  return db.queryAsync(`SELECT * FROM fournisseur`).then((response) => {
+    return response[0];
+  });
+};
+
+let DeleteFr = (id) => {
+  console.log("delete envoked", id);
+  return db.queryAsync(`DELETE FROM fournisseur WHERE id = ${id}`);
+};
+
+module.exports = {
+  connection,
+  adminLogIn,
+  createUser,
+  addAdmin,
+  userLogIn,
+  getFournissurs,
+  DeleteFr,
+  selectVendorSummaryListe
+};
