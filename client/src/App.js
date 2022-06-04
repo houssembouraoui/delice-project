@@ -32,7 +32,7 @@ const App = () => {
     <>
       <MyContext.Provider value={test}>
       <Header />
-        <CamionPage />
+        {/* <CamionPage /> */}
         {view.includes("admin") ? (
           <AdminNav view={view} changeView={changeView} />
         ) : (
