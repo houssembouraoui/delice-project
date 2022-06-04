@@ -61,6 +61,12 @@ let getFournissurs = (req, res) => {
   });
 };
 
+let DeleteFr = (id) => {
+  console.log(id);
+
+  return db.queryAsync(`DELETE FROM fournisseur WHERE id = ${id}`);
+};
+
 module.exports = {
   connection,
   adminLogIn,
@@ -68,4 +74,5 @@ module.exports = {
   addAdmin,
   userLogIn,
   getFournissurs,
+  DeleteFr,
 };

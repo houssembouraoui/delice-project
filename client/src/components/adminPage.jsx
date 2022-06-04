@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 
 const AdminPage = (props) => {
   const [fournisseurs, setFournisseurs] = useState([]);
-
+  console.log(fournisseurs);
   useEffect(() => {
     axios
       .get("http://localhost:5000/fetch/fournisseurs")
@@ -11,7 +11,13 @@ const AdminPage = (props) => {
         setFournisseurs(response.data);
       })
       .catch((err) => console.log(err));
-  });
+  }, []);
+
+  let deleteFournisseur = (e) => {
+    axios
+      .delete(`http://localhost:5000/delete/fournisseurs/:${e}`)
+      .then(() => alert("deleted successfully"));
+  };
 
   return (
     <>
@@ -46,7 +52,6 @@ const AdminPage = (props) => {
                                 width="24"
                                 height="24"
                                 viewBox="0 0 48 48"
-                                // style=" fill:#000000;"
                                 style={{ fill: "#000000" }}
                               >
                                 <path
@@ -74,7 +79,7 @@ const AdminPage = (props) => {
                         <td class="py-3 px-6 text-left">
                           <div class="flex items-center">
                             <div class="mr-2"></div>
-                            <span>nom </span>
+                            <span>{f.name} </span>
                           </div>
                         </td>
                         <td class="py-3 px-6 text-left">
@@ -86,25 +91,25 @@ const AdminPage = (props) => {
                         <td class="py-3 px-6 text-left">
                           <div class="flex items-center">
                             <div class="mr-2"></div>
-                            <span>telephone</span>
+                            <span>{f.phone}</span>
                           </div>
                         </td>{" "}
                         <td class="py-3 px-6 text-left">
                           <div class="flex items-center">
                             <div class="mr-2"></div>
-                            <span>adress</span>
+                            <span>{f.adress}</span>
                           </div>
                         </td>
                         <td class="py-3 px-6 text-center">
                           <div class="flex items-center">
                             <div class="mr-2"></div>
-                            <span>Email</span>
+                            <span>{f.email}</span>
                           </div>
                         </td>
                         <td class="py-3 px-6 text-center">
                           <div class="flex items-center">
                             <div class="mr-2"></div>
-                            <span>Email</span>
+                            <span>prix d'achat</span>
                           </div>
                           {/* <span class="bg-purple-200 text-purple-600 py-1 px-3 rounded-full text-xs">
                           prix
@@ -148,7 +153,10 @@ const AdminPage = (props) => {
                                 />
                               </svg>
                             </div>
-                            <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
+                            <div
+                              class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110"
+                              onClick={deleteFournisseur(f.id)}
+                            >
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"

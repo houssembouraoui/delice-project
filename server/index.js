@@ -4,6 +4,9 @@ const port = 5000;
 const path = require("path");
 const crypto = require("crypto");
 
+const cors = require("cors");
+app.use(cors());
+
 var connection = require("./database-mysql/index.js");
 const { adminLogIn } = require("./database-mysql/index.js");
 
@@ -32,6 +35,11 @@ app.get("/admin/login", (request, response) => {
 
 app.get("/test", (request, response) => {
   response.send("hello world");
+});
+
+app.delete("/delete/fournisseur/id", (req, res) => {
+  console.log(req.params);
+  connection.DeleteFr(req.params.id);
 });
 
 app.get("/user/login", (req, res) => {
