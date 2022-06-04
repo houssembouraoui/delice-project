@@ -10,7 +10,6 @@ const user = {
 }
 const navigation = [
   { name: 'Liste des camions', href: '#', current: true, permission: ["Agent RECEPTOR"] },
-  { name: 'Nouveau Camion', href: '#', current: false, permission: ["Agent RECEPTOR"] },
   { name: 'test', href: '#', current: false, permission: ["Agentt"] },
 ]
 const userNavigation = [

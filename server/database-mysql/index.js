@@ -5,6 +5,7 @@ const mysql = require("mysql");
 var connection = mysql.createConnection({
   host: "localhost",
   user: "root",
+  port: 3306,
   password: "password",
   database: "milk",
 });
@@ -58,4 +59,12 @@ let userLogIn = (req, res) => {
     });
 };
 
-module.exports = { connection, adminLogIn, createUser, addAdmin, userLogIn };
+let selectVendorSummaryListe = (req, res) => {
+  return db.queryAsync(
+    `SELECT id,image,firstname,lastname from  fournisseur`
+  ).then(
+    (res) => console.log(res)
+  ).catch((err) => console.log(err))
+}
+
+module.exports = { connection, adminLogIn, createUser, addAdmin, userLogIn, selectVendorSummaryListe };
