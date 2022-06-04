@@ -34,7 +34,7 @@ const App = () => {
       <Header />
         {/* <CamionPage /> */}
         {view.includes("admin") ? (
-          <AdminNav view={view} changeView={changeView} />
+          <NewAdminNav view={view} changeView={changeView} />
         ) : (
           <NavBar view={view} changeView={changeView} />
         )}
@@ -50,7 +50,7 @@ const App = () => {
 
       {view === "analyse" && <Analyse />}
 
-        <Footer changeView={changeView} />
+        <NewAdminNav changeView={changeView} />
       </MyContext.Provider>
     </>
   );
