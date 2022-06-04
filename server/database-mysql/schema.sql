@@ -65,7 +65,16 @@ CREATE TABLE collier (
     id int NOT NULL AUTO_INCREMENT,
     code int NOT NULL,
     PRIMARY KEY (ID)
-)
+);
+
+CREATE TABLE camion (
+    camionId int NOT NULL AUTO_INCREMENT,
+    vendorId int NOT NULL,
+    registration varchar(50) NOT NULL,
+    warblerDate date NOT NULL,
+    quantity int not null,
+    PRIMARY KEY (camionId)
+);
 
 -- CREATE TABLE criteria (
 --     temperature

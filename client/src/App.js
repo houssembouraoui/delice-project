@@ -12,6 +12,9 @@ import UserNav from "./layouts/userNav.jsx";
 import Nav from "./layouts/newNav.jsx";
 import Test from "./components/contextTest.jsx";
 import { Context } from "./components/contextBidou.js";
+import Header from "./components/header/Header.jsx"; 
+import CamionTable from "./components/receptorAgent/CamionTable.jsx";
+import CamionPage from "./components/receptorAgent/CamionPage.jsx";
 import NewAdminNav from "./layouts/adminNav.jsx";
 import NewFooter from "./layouts/newFooter.jsx";
 
@@ -27,24 +30,28 @@ const App = () => {
 
   return (
     <>
-      <Test />
-      {view.includes("admin") ? (
-        <NewAdminNav view={view} changeView={changeView} />
-      ) : (
-        <NavBar view={view} changeView={changeView} />
-      )}
-      {view === "home" && <Home />}
-      {view === "login" && <LogIn changeView={changeView} />}
-      {view === "adminLogIn" && (
-        <AdminAuth changeView={changeView} view={view} />
-      )}
-      {view === "admin add" && <AddUser />}
-      {view === "admin page" && (
-        <AdminPage changeView={changeView} view={view} />
-      )}
+      <MyContext.Provider value={test}>
+      <Header />
+        {/* <CamionPage /> */}
+        {view.includes("admin") ? (
+          <NewAdminNav view={view} changeView={changeView} />
+        ) : (
+          <NavBar view={view} changeView={changeView} />
+        )}
+        {view === "home" && <Home />}
+        {view === "login" && <LogIn changeView={changeView} />}
+        {view === "adminLogIn" && (
+          <AdminAuth changeView={changeView} view={view} />
+        )}
+        {view === "admin add" && <AddUser />}
+        {view === "admin page" && (
+          <AdminPage changeView={changeView} view={view} />
+        )}
 
       {view === "analyse" && <Analyse />}
-      <NewFooter changeView={changeView} />
+
+        <NewAdminNav changeView={changeView} />
+      </MyContext.Provider>
     </>
   );
 };
