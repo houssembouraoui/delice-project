@@ -62,8 +62,7 @@ let getFournissurs = (req, res) => {
 };
 
 let DeleteFr = (id) => {
-  console.log(id);
-
+  console.log("delete envoked", id);
   return db.queryAsync(`DELETE FROM fournisseur WHERE id = ${id}`);
 };
 

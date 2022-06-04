@@ -13,38 +13,38 @@ const AdminPage = (props) => {
       .catch((err) => console.log(err));
   }, []);
 
-  let deleteFournisseur = (e) => {
+  let deleteFournisseur = (id) => {
     axios
-      .delete(`http://localhost:5000/delete/fournisseurs/:${e}`)
+      .delete(`http://localhost:5000/delete/fournisseur/${id}`)
       .then(() => alert("deleted successfully"));
   };
 
   return (
     <>
-      <div class="overflow-x-auto">
-        <div class="min-w-screen min-h-screen flex items-center justify-center bg-gray-100 font-sans overflow-hidden">
-          <div class="w-full lg:w-5/6">
-            <div class="bg-white shadow-md rounded my-6">
-              <table class="min-w-max w-full table-auto">
+      <div className="overflow-x-auto">
+        <div className="min-w-screen min-h-screen flex items-center justify-center bg-gray-100 font-sans overflow-hidden">
+          <div className="w-full lg:w-5/6">
+            <div className="bg-white shadow-md rounded my-6">
+              <table className="min-w-max w-full table-auto">
                 <thead>
-                  <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                    <th class="py-3 px-6 text-left">Image</th>
-                    <th class="py-3 px-6 text-left">Nom</th>
-                    <th class="py-3 px-6 text-center">Prenom</th>
-                    <th class="py-3 px-6 text-center">Telephone</th>
-                    <th class="py-3 px-6 text-center">Adresse</th>
-                    <th class="py-3 px-6 text-center">Email</th>
-                    <th class="py-3 px-6 text-center">Prix d'Achat</th>
-                    <th class="py-3 px-6 text-center">Actions</th>
+                  <tr className="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                    <th className="py-3 px-6 text-left">Image</th>
+                    <th className="py-3 px-6 text-left">Nom</th>
+                    <th className="py-3 px-6 text-center">Prenom</th>
+                    <th className="py-3 px-6 text-center">Telephone</th>
+                    <th className="py-3 px-6 text-center">Adresse</th>
+                    <th className="py-3 px-6 text-center">Email</th>
+                    <th className="py-3 px-6 text-center">Prix d'Achat</th>
+                    <th className="py-3 px-6 text-center">Actions</th>
                   </tr>
                 </thead>
                 {fournisseurs.map((f) => {
                   return (
-                    <tbody class="text-gray-600 text-sm font-light">
-                      <tr class="border-b border-gray-200 hover:bg-gray-100">
-                        <td class="py-3 px-6 text-left whitespace-nowrap">
-                          <div class="flex items-center">
-                            <div class="mr-2">
+                    <tbody className="text-gray-600 text-sm font-light">
+                      <tr className="border-b border-gray-200 hover:bg-gray-100">
+                        <td className="py-3 px-6 text-left whitespace-nowrap">
+                          <div className="flex items-center">
+                            <div className="mr-2">
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 x="0px"
@@ -76,48 +76,48 @@ const AdminPage = (props) => {
                             </div>
                           </div>
                         </td>
-                        <td class="py-3 px-6 text-left">
-                          <div class="flex items-center">
-                            <div class="mr-2"></div>
+                        <td className="py-3 px-6 text-left">
+                          <div className="flex items-center">
+                            <div className="mr-2"></div>
                             <span>{f.name} </span>
                           </div>
                         </td>
-                        <td class="py-3 px-6 text-left">
-                          <div class="flex items-center">
-                            <div class="mr-2"></div>
+                        <td className="py-3 px-6 text-left">
+                          <div className="flex items-center">
+                            <div className="mr-2"></div>
                             <span>Prenom</span>
                           </div>
                         </td>{" "}
-                        <td class="py-3 px-6 text-left">
-                          <div class="flex items-center">
-                            <div class="mr-2"></div>
+                        <td className="py-3 px-6 text-left">
+                          <div className="flex items-center">
+                            <div className="mr-2"></div>
                             <span>{f.phone}</span>
                           </div>
                         </td>{" "}
-                        <td class="py-3 px-6 text-left">
-                          <div class="flex items-center">
-                            <div class="mr-2"></div>
+                        <td className="py-3 px-6 text-left">
+                          <div className="flex items-center">
+                            <div className="mr-2"></div>
                             <span>{f.adress}</span>
                           </div>
                         </td>
-                        <td class="py-3 px-6 text-center">
-                          <div class="flex items-center">
-                            <div class="mr-2"></div>
+                        <td className="py-3 px-6 text-center">
+                          <div className="flex items-center">
+                            <div className="mr-2"></div>
                             <span>{f.email}</span>
                           </div>
                         </td>
-                        <td class="py-3 px-6 text-center">
-                          <div class="flex items-center">
-                            <div class="mr-2"></div>
+                        <td className="py-3 px-6 text-center">
+                          <div className="flex items-center">
+                            <div className="mr-2"></div>
                             <span>prix d'achat</span>
                           </div>
-                          {/* <span class="bg-purple-200 text-purple-600 py-1 px-3 rounded-full text-xs">
+                          {/* <span className="bg-purple-200 text-purple-600 py-1 px-3 rounded-full text-xs">
                           prix
                         </span> */}
                         </td>
-                        <td class="py-3 px-6 text-center">
-                          <div class="flex item-center justify-center">
-                            <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
+                        <td className="py-3 px-6 text-center">
+                          <div className="flex item-center justify-center">
+                            <div className="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
@@ -138,7 +138,7 @@ const AdminPage = (props) => {
                                 />
                               </svg>
                             </div>
-                            <div class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
+                            <div className="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
@@ -154,8 +154,8 @@ const AdminPage = (props) => {
                               </svg>
                             </div>
                             <div
-                              class="w-4 mr-2 transform hover:text-purple-500 hover:scale-110"
-                              onClick={deleteFournisseur(f.id)}
+                              className="w-4 mr-2 transform hover:text-purple-500 hover:scale-110"
+                              onClick={() => deleteFournisseur(f.id)}
                             >
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"

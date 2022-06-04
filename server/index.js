@@ -37,9 +37,11 @@ app.get("/test", (request, response) => {
   response.send("hello world");
 });
 
-app.delete("/delete/fournisseur/id", (req, res) => {
-  console.log(req.params);
-  connection.DeleteFr(req.params.id);
+app.delete("/delete/fournisseur/:id", (req, res) => {
+  connection
+    .DeleteFr(req.params.id)
+    .then((res) => res.send(res))
+    .catch((err) => err);
 });
 
 app.get("/user/login", (req, res) => {
@@ -61,7 +63,6 @@ app.post("/new/user", (req, res) => {
     your default password is ${password}`,
   };
 
-  console.log(req.body);
   connection
     .createUser(req, password)
     .then((result) => {
