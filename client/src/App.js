@@ -14,7 +14,9 @@ import UserNav from "./layouts/userNav.jsx";
 import Nav from "./layouts/newNav.jsx";
 import Test from "./components/contextTest.jsx";
 import { Context } from "./components/contextBidou.js";
-import Header from "./components/header/header.jsx"; 
+import Header from "./components/header/Header.jsx"; 
+import CamionTable from "./components/receptorAgent/CamionTable.jsx";
+import CamionPage from "./components/receptorAgent/CamionPage.jsx";
 
 export const MyContext = React.createContext();
 
@@ -29,9 +31,8 @@ const App = () => {
   return (
     <>
       <MyContext.Provider value={test}>
-        <Header />
-        {/* <Nav />
-        <Test />
+      <Header />
+        <CamionPage />
         {view.includes("admin") ? (
           <AdminNav view={view} changeView={changeView} />
         ) : (
@@ -47,9 +48,9 @@ const App = () => {
           <AdminPage changeView={changeView} view={view} />
         )}
 
-        {view === "analyse" && <Analyse />}
+      {view === "analyse" && <Analyse />}
 
-        <Footer changeView={changeView} /> */}
+        <Footer changeView={changeView} />
       </MyContext.Provider>
     </>
   );
