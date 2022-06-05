@@ -42,30 +42,28 @@ const App = () => {
         ) : (
           <NavBar view={view} changeView={changeView} />
         )}
-        <BrowserRouter>
-          <Routes>
-            <Route exact path="/" element={<Home />} />
-            <Route
-              exact
-              path="/userLogin"
-              element={<LogIn changeView={changeView} />}
-            />
+        <Routes>
+          <Route exact path="/" element={<Home />} />
+          <Route
+            exact
+            path="/userLogin"
+            element={<LogIn changeView={changeView} />}
+          />
 
-            <Route
-              exact
-              path="/adminLogin"
-              element={<AdminLogin changeView={changeView} view={view} />}
-            />
-            <Route exact path="addUser" element={<AddUser />} />
+          <Route
+            exact
+            path="/adminLogin"
+            element={<AdminLogin changeView={changeView} view={view} />}
+          />
+          <Route exact path="addUser" element={<AddUser />} />
 
-            <Route
-              exact
-              path="/admin"
-              element={<AdminPage changeView={changeView} view={view} />}
-            />
-            <Route exact path="/analyse" element={<Analyse />} />
-          </Routes>
-        </BrowserRouter>
+          <Route
+            exact
+            path="/admin"
+            element={<AdminPage changeView={changeView} view={view} />}
+          />
+          <Route exact path="/analyse" element={<Analyse />} />
+        </Routes>
         <NewFooter changeView={changeView} />
       </MyContext.Provider>
     </>
