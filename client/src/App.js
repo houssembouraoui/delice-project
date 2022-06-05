@@ -14,6 +14,7 @@ import Test from "./components/contextTest.jsx";
 import { Context } from "./components/contextBidou.js";
 import NewAdminNav from "./layouts/adminNav.jsx";
 import NewFooter from "./layouts/newFooter.jsx";
+import AdminLogin from "./components/AdminLogin.jsx";
 
 export const MyContext = React.createContext();
 
@@ -33,10 +34,11 @@ const App = () => {
       ) : (
         <NavBar view={view} changeView={changeView} />
       )}
+
       {view === "home" && <Home />}
       {view === "login" && <LogIn changeView={changeView} />}
       {view === "adminLogIn" && (
-        <AdminAuth changeView={changeView} view={view} />
+        <AdminLogin changeView={changeView} view={view} />
       )}
       {view === "admin add" && <AddUser />}
       {view === "admin page" && (
