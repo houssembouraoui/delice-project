@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const AdminLogin = (props) => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [data, setData] = useState({});
@@ -20,6 +22,7 @@ const AdminLogin = (props) => {
       props.changeView("admin page");
       console.log(props.view);
       console.log(pass);
+      return navigate("/admin");
     } else {
       setPass(false);
       console.log(props.view);
@@ -112,7 +115,6 @@ const AdminLogin = (props) => {
                 Mot de passe oublié ?
               </a>
             </div>
-
             <button
               className="text-center w-full bg-blue-700 rounded-full text-white py-3 font-medium"
               onClick={() => authenticate()}

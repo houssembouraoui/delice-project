@@ -3,7 +3,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 import AdminAuth from "./components/AdminAuth.jsx";
 import Home from "./components/home.jsx";
-import LogIn from "./components/login.jsx";
 import NavBar from "./layouts/navBar.jsx";
 import AddUser from "./components/addUser.jsx";
 import axios from "axios";
@@ -19,7 +18,7 @@ import CamionPage from "./components/receptorAgent/CamionPage.jsx";
 import NewAdminNav from "./layouts/adminNav.jsx";
 import NewFooter from "./layouts/newFooter.jsx";
 import AdminLogin from "./components/AdminLogin.jsx";
-import NewUserLogin from "./components/newUserLogin.jsx";
+import NewUserLogin from "./components/userLogin.jsx";
 
 export const MyContext = React.createContext();
 
@@ -44,10 +43,11 @@ const App = () => {
         )}
         <Routes>
           <Route exact path="/" element={<Home />} />
+
           <Route
             exact
             path="/userLogin"
-            element={<LogIn changeView={changeView} />}
+            element={<NewUserLogin changeView={changeView} />}
           />
 
           <Route
