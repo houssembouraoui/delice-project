@@ -13,10 +13,10 @@ const AdminPage = (props) => {
       .catch((err) => console.log(err));
   }, []);
 
-  let deleteFournisseur = (id) => {
+  let deleteFournisseur = (id, i) => {
     axios
       .delete(`http://localhost:5000/delete/fournisseur/${id}`)
-      .then(() => alert("deleted successfully"));
+      .then(() => fournisseurs.splice(i, 1));
   };
 
   return (
@@ -38,7 +38,7 @@ const AdminPage = (props) => {
                     <th className="py-3 px-6 text-center">Actions</th>
                   </tr>
                 </thead>
-                {fournisseurs.map((f) => {
+                {fournisseurs.map((f, i) => {
                   return (
                     <tbody
                       className="text-gray-600 text-sm font-light"
@@ -158,7 +158,7 @@ const AdminPage = (props) => {
                             </div>
                             <div
                               className="w-4 mr-2 transform hover:text-purple-500 hover:scale-110"
-                              onClick={() => deleteFournisseur(f.id)}
+                              onClick={() => deleteFournisseur(f.id, i)}
                             >
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"

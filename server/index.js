@@ -54,6 +54,7 @@ app.get("/user/login", (req, res) => {
 });
 
 app.post("/new/user", (req, res) => {
+  console.log("sent");
   let password = crypto.randomBytes(20).toString("hex");
   let details = {
     from: "'delice' deliceproject6@gmail.com",
