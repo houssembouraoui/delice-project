@@ -66,6 +66,11 @@ let DeleteFr = (id) => {
   return db.queryAsync(`DELETE FROM fournisseur WHERE id = ${id}`);
 };
 
+let GetUsers = (role) => {
+  console.log("request sent");
+  return db.queryAsync(`SELECT * FROM ${role}`).then((response) => response[0]);
+};
+
 module.exports = {
   connection,
   adminLogIn,
@@ -74,4 +79,5 @@ module.exports = {
   userLogIn,
   getFournissurs,
   DeleteFr,
+  GetUsers,
 };

@@ -97,6 +97,13 @@ app.get("/fetch/fournisseurs", (req, res) => {
     .catch((err) => console.log(err));
 });
 
+app.get("/users/:role", (req, res) => {
+  connection
+    .GetUsers(req.params.role)
+    .then((response) => res.send(response))
+    .catch((error) => console.log(error));
+});
+
 app.listen(port, () => {
   console.log(`app listening at http://localhost:${port}`);
 });
