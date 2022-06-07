@@ -104,6 +104,12 @@ app.get("/users/:role", (req, res) => {
     .catch((error) => console.log(error));
 });
 
+app.delete("/users/delete", (req, res) => {
+  connection
+    .deleteUser(req.query.role, req.query.id)
+    .then(() => res.send("success"));
+});
+
 app.listen(port, () => {
   console.log(`app listening at http://localhost:${port}`);
 });

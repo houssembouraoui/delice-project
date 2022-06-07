@@ -5,6 +5,7 @@ import { useParams, useNavigate } from "react-router-dom";
 const UsersTable = () => {
   let { role } = useParams();
   let [users, setUsers] = useState();
+  let [update, setUpdate] = useState(false);
   console.log(role);
 
   useEffect(() => {
@@ -16,6 +17,14 @@ const UsersTable = () => {
       })
       .catch((error) => console.errer(error));
   }, []);
+
+  let deleteUser = (id) => {
+    console.log({ role, id });
+    axios
+      .delete(`http://localhost:5000/users/delete`, { params: { role, id } })
+      .then(() => console.log("sucesss"));
+  };
+
   return (
     <>
       <div className="overflow-x-auto">
@@ -31,7 +40,6 @@ const UsersTable = () => {
                     <th className="py-3 px-6 text-center">Telephone</th>
                     <th className="py-3 px-6 text-center">Adresse</th>
                     <th className="py-3 px-6 text-center">Email</th>
-                    <th className="py-3 px-6 text-center">Prix d'Achat</th>
                     <th className="py-3 px-6 text-center">Actions</th>
                   </tr>
                 </thead>
@@ -80,42 +88,58 @@ const UsersTable = () => {
                           <td className="py-3 px-6 text-left">
                             <div className="flex items-center">
                               <div className="mr-2"></div>
-                              <span>name</span>
+                              <span>{user.firstname}</span>
                             </div>
+                            {update && (
+                              <div className="flex items-center">
+                                <div className="mr-2"></div>
+                                <span>update name</span>
+                              </div>
+                            )}
                           </td>
                           <td className="py-3 px-6 text-left">
                             <div className="flex items-center">
                               <div className="mr-2"></div>
-                              <span>Prenom</span>
+                              <span>{user.lastname}</span>
                             </div>
+                            {update && (
+                              <div className="flex items-center">
+                                <div className="mr-2"></div>
+                                <span>update Prenom</span>
+                              </div>
+                            )}
                           </td>
                           <td className="py-3 px-6 text-left">
                             <div className="flex items-center">
                               <div className="mr-2"></div>
                               <span>phone</span>
                             </div>
+                            {update && (
+                              <div className="flex items-center">
+                                <div className="mr-2"></div>
+                                <span>update phone</span>
+                              </div>
+                            )}
                           </td>
                           <td className="py-3 px-6 text-left">
                             <div className="flex items-center">
                               <div className="mr-2"></div>
-                              <span>adress</span>
+                              <span>{user.adress}</span>
                             </div>
                           </td>
                           <td className="py-3 px-6 text-center">
                             <div className="flex items-center">
                               <div className="mr-2"></div>
-                              <span>email</span>
+                              <span>{user.email}</span>
                             </div>
+                            {update && (
+                              <div className="flex items-center">
+                                <div className="mr-2"></div>
+                                <span>update email</span>
+                              </div>
+                            )}
                           </td>
-                          <td className="py-3 px-6 text-center">
-                            <div className="flex items-center">
-                              <div className="mr-2"></div>
-                              <span>prix d'achat</span>
-                            </div>
-                            {/* <span className="bg-purple-200 text-purple-600 py-1 px-3 rounded-full text-xs">
-                          prix
-                        </span> */}
-                          </td>
+
                           <td className="py-3 px-6 text-center">
                             <div className="flex item-center justify-center">
                               <div className="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
@@ -154,7 +178,10 @@ const UsersTable = () => {
                                   />
                                 </svg>
                               </div>
-                              <div className="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
+                              <div
+                                className="w-4 mr-2 transform hover:text-red-500 hover:scale-110"
+                                onClick={() => deleteUser(user.id)}
+                              >
                                 <svg
                                   xmlns="http://www.w3.org/2000/svg"
                                   fill="none"

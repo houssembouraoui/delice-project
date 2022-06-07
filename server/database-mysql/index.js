@@ -71,6 +71,10 @@ let GetUsers = (role) => {
   return db.queryAsync(`SELECT * FROM ${role}`).then((response) => response[0]);
 };
 
+let deleteUser = (role, id) => {
+  return db.queryAsync(`DELETE FROM ${role} WHERE id = ${id}`);
+};
+
 module.exports = {
   connection,
   adminLogIn,
@@ -80,4 +84,5 @@ module.exports = {
   getFournissurs,
   DeleteFr,
   GetUsers,
+  deleteUser,
 };
