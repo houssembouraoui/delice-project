@@ -1,24 +1,26 @@
-import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
-import UsersTable from "./usersTable";
+// zeyda but might need it
 
-const UsersPage = () => {
-  let { role } = useParams();
-  let [users, setUsers] = useState();
+// import axios from "axios";
+// import React, { useEffect, useState } from "react";
+// import { useParams, useNavigate } from "react-router-dom";
+// import UsersTable from "./usersTable";
 
-  useEffect(() => {
-    axios
-      .get(`http://localhost:5000/users/${role}`)
-      .then((response) => setUsers(response.data))
-      .catch((error) => console.errer(error));
-  }, []);
+// const UsersPage = () => {
+//   let { role } = useParams();
+//   let [users, setUsers] = useState();
 
-  return (
-    <div>
-      <UsersTable role={users} />
-    </div>
-  );
-};
+//   useEffect(() => {
+//     axios
+//       .get(`http://localhost:5000/users/${role}`)
+//       .then((response) => setUsers(response.data))
+//       .catch((error) => console.errer(error));
+//   }, []);
 
-export default UsersPage;
+//   return (
+//     <div>
+//       <UsersTable role={users} />
+//     </div>
+//   );
+// };
+
+// export default UsersPage;
