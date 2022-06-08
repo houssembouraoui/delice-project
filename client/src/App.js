@@ -38,10 +38,8 @@ const App = () => {
       <MyContext.Provider value={test}>
         <Header />
         {/* <CamionPage /> */}
-        {view.includes("admin") ? (
+        {view.includes("admin") && (
           <NewAdminNav view={view} changeView={changeView} />
-        ) : (
-          <NavBar view={view} changeView={changeView} />
         )}
         <Routes>
           <Route exact path="/" element={<Home />} />
