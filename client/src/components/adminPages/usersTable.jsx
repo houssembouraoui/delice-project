@@ -10,7 +10,7 @@ const UsersTable = () => {
   let currentUser = useContext(Context);
   const navigate = useNavigate();
 
-  console.log(currentUser, "test");
+  console.log(users, "test");
 
   useEffect(() => {
     currentUser.setRole(role);

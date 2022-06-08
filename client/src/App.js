@@ -16,12 +16,13 @@ import Header from "./components/header/Header.jsx";
 import CamionTable from "./components/receptorAgent/CamionTable.jsx";
 import CamionPage from "./components/receptorAgent/CamionPage.jsx";
 import NewAdminNav from "./layouts/adminNav.jsx";
-import NewFooter from "./layouts/newFooter.jsx";
 import AdminLogin from "./components/AdminLogin.jsx";
 import NewUserLogin from "./components/userLogin.jsx";
 import UsersPage from "./components/adminPages/usersPage.jsx";
 import UsersTable from "./components/adminPages/usersTable.jsx";
 import UpdateUser from "./components/adminPages/updateUser.jsx";
+import NewAddUser from "./components/newAddUser.jsx";
+import AnalysePage from "./components/analyseAgent/analysePage.jsx";
 
 export const MyContext = React.createContext();
 
@@ -65,8 +66,10 @@ const App = () => {
           <Route exact path="/analyse" element={<Analyse />} />
           <Route exact path="/admin/:role" element={<UsersTable />} />
           <Route exact path="/admin/update" element={<UpdateUser />} />
+          <Route exact path="/newAddUser" element={<NewAddUser />} />
+          <Route exact path="/camion" element={<CamionPage />} />
+          <Route exact path="/analysepage" element={<AnalysePage />} />
         </Routes>
-        <NewFooter changeView={changeView} />
       </MyContext.Provider>
     </>
   );
