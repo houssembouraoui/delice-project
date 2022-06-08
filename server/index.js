@@ -110,6 +110,11 @@ app.delete("/users/delete", (req, res) => {
     .then(() => res.send("success"));
 });
 
+app.put(`/users/update/:role`, (req, res) => {
+  console.log("updating");
+  connection.updateUser(req.params.role, req.body);
+});
+
 app.listen(port, () => {
   console.log(`app listening at http://localhost:${port}`);
 });

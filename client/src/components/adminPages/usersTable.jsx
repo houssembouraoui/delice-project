@@ -1,14 +1,19 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import React, { useEffect, useState, useContext } from "react";
+import { useParams, useNavigate, Navigate } from "react-router-dom";
+import { Context } from "../contextBidou";
 
 const UsersTable = () => {
   let { role } = useParams();
   let [users, setUsers] = useState();
   let [update, setUpdate] = useState(false);
-  console.log(role);
+  let currentUser = useContext(Context);
+  const navigate = useNavigate();
+
+  console.log(currentUser, "test");
 
   useEffect(() => {
+    currentUser.setRole(role);
     axios
       .get(`http://localhost:5000/users/${role}`)
       .then((response) => {
@@ -163,7 +168,13 @@ const UsersTable = () => {
                                   />
                                 </svg>
                               </div>
-                              <div className="w-4 mr-2 transform hover:text-purple-500 hover:scale-110">
+                              <div
+                                className="w-4 mr-2 transform hover:text-purple-500 hover:scale-110"
+                                onClick={() => {
+                                  currentUser.setUserValue(user);
+                                  navigate("/admin/update");
+                                }}
+                              >
                                 <svg
                                   xmlns="http://www.w3.org/2000/svg"
                                   fill="none"

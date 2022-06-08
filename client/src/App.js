@@ -21,6 +21,7 @@ import AdminLogin from "./components/AdminLogin.jsx";
 import NewUserLogin from "./components/userLogin.jsx";
 import UsersPage from "./components/adminPages/usersPage.jsx";
 import UsersTable from "./components/adminPages/usersTable.jsx";
+import UpdateUser from "./components/adminPages/updateUser.jsx";
 
 export const MyContext = React.createContext();
 
@@ -65,6 +66,7 @@ const App = () => {
           />
           <Route exact path="/analyse" element={<Analyse />} />
           <Route exact path="/admin/:role" element={<UsersTable />} />
+          <Route exact path="/admin/update" element={<UpdateUser />} />
         </Routes>
         <NewFooter changeView={changeView} />
       </MyContext.Provider>

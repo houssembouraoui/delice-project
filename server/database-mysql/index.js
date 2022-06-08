@@ -75,6 +75,14 @@ let deleteUser = (role, id) => {
   return db.queryAsync(`DELETE FROM ${role} WHERE id = ${id}`);
 };
 
+let updateUser = (role, body) => {
+  console.log(role, body, "request handling in the database");
+
+  return db.queryAsync(
+    `UPDATE analyse SET firstname = "${body.firstname}", lastname = "${body.lastname}", email = "${body.email}", image = "${body.image}", phonenumber = ${body.phonenumber} WHERE id = ${body.id};`
+  );
+};
+
 module.exports = {
   connection,
   adminLogIn,
@@ -85,4 +93,5 @@ module.exports = {
   DeleteFr,
   GetUsers,
   deleteUser,
+  updateUser,
 };
