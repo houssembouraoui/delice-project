@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import OutlinedInput from "@mui/material/OutlinedInput";
@@ -9,6 +9,7 @@ import TextField from "@mui/material/TextField";
 import InputAdornment from "@mui/material/InputAdornment";
 import Button from "@mui/material/Button";
 import useAnalyseForm, { prepareCamionFormPayload } from "./useAnalyseForm";
+import { Context } from "../../contextBidou";
 
 export default function AnalyseForm({
   setOpenUpdateModal,
@@ -19,9 +20,10 @@ export default function AnalyseForm({
   const { initialValues, formIsReady, setFormIsReady } = useAnalyseForm({
     formContext,
   });
+  const data = useContext(Context);
+  console.log(data, "data from the context in the form");
 
   // useEffect(() => {
-  console.log(initialValues, "detailssssssssssss");
   // });
 
   const {
@@ -40,6 +42,7 @@ export default function AnalyseForm({
   }, [initialValues]);
 
   const onSubmit = (data) => {
+    // console.log(initialValues);
     const payload = prepareCamionFormPayload(data);
   };
 
@@ -90,7 +93,10 @@ export default function AnalyseForm({
                       value={value}
                       type="text"
                       id="outlined-read-only-input"
-                      onChange={(e) => onChange(e)}
+                      onChange={(e) => {
+                        console.log(onChange);
+                        onChange(e);
+                      }}
                       fullWidth
                     />
                   )}

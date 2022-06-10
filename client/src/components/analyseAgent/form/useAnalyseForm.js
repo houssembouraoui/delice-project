@@ -1,22 +1,24 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { Context } from "../../contextBidou";
 
 export const prepareCamionFormPayload = (formOutPut) => {
   console.log(formOutPut);
   return {};
 };
 
+
 const useAnalyseForm = ({ formContext }) => {
   const [formIsReady, setFormIsReady] = useState(false);
   const [initialValues, setInitialValues] = useState({
     id: 1,
-    fournisseur: "",
+    fournisseur: "test",
     humidité: 0,
     ph: 0,
     densité: 0,
     acidité: 0,
-    aspect: "",
+    aspect: "test",
     matiere: 0,
-    etat: "",
+    etat: "test",
     Date: 0,
   });
   const camionDatas = {

@@ -115,6 +115,13 @@ app.put(`/users/update/:role`, (req, res) => {
   connection.updateUser(req.params.role, req.body);
 });
 
+app.get("/lesanalyses", (req, res) => {
+  connection
+    .getAanalyses()
+    .then((response) => res.send(response))
+    .catch((error) => console.log(error));
+});
+
 app.listen(port, () => {
   console.log(`app listening at http://localhost:${port}`);
 });

@@ -23,6 +23,7 @@ import UsersTable from "./components/adminPages/usersTable.jsx";
 import UpdateUser from "./components/adminPages/updateUser.jsx";
 import NewAddUser from "./components/newAddUser.jsx";
 import AnalysePage from "./components/analyseAgent/analysePage.jsx";
+import InvoiceTemplate from "./components/invoiceTemplate.jsx";
 
 export const MyContext = React.createContext();
 
@@ -69,6 +70,7 @@ const App = () => {
           <Route exact path="/newAddUser" element={<NewAddUser />} />
           <Route exact path="/camion" element={<CamionPage />} />
           <Route exact path="/analysepage" element={<AnalysePage />} />
+          <Route exact path="/invoice" element={<InvoiceTemplate />} />
         </Routes>
       </MyContext.Provider>
     </>

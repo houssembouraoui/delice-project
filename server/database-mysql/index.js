@@ -1,6 +1,8 @@
 const { Promise } = require("bluebird");
 const { append } = require("express/lib/response");
 const mysql = require("mysql");
+//syntax works for inserting with a foregn key
+// insert into lesAnalyses (humidite, ph, densite, acidite, aspeect_couleur, matiere_grasse, etat, fournisseur_id) values (1, 1, 1, 1, "aspect", 12, "etat",  1)
 
 var connection = mysql.createConnection({
   host: "localhost",
@@ -83,6 +85,12 @@ let updateUser = (role, body) => {
   );
 };
 
+let getAanalyses = () => {
+  return db
+    .queryAsync(`SELECT * FROM lesAnalyses`)
+    .then((response) => response[0]);
+};
+
 module.exports = {
   connection,
   adminLogIn,
@@ -94,4 +102,5 @@ module.exports = {
   GetUsers,
   deleteUser,
   updateUser,
+  getAanalyses,
 };
