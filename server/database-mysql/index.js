@@ -91,6 +91,11 @@ let getAanalyses = () => {
     .then((response) => response[0]);
 };
 
+let deleteAnalyse = (id) => {
+  console.log(id);
+  return db.queryAsync(`DELETE FROM lesAnalyses WHERE id = ${id}`);
+};
+
 module.exports = {
   connection,
   adminLogIn,
@@ -103,4 +108,5 @@ module.exports = {
   deleteUser,
   updateUser,
   getAanalyses,
+  deleteAnalyse,
 };

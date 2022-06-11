@@ -39,7 +39,7 @@ export default function AnalyseTable({
       .catch((error) => console.error(error));
   }, []);
 
-  console.log(data, "el data");
+  // console.log(data, "el data");
 
   const columns = [
     { field: "id", headerName: "ID", width: 50, hide: true },

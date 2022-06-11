@@ -21,7 +21,7 @@ export default function AnalyseForm({
     formContext,
   });
   const data = useContext(Context);
-  console.log(data, "data from the context in the form");
+  // console.log(data, "data from the context in the form");
 
   // useEffect(() => {
   // });
@@ -94,7 +94,7 @@ export default function AnalyseForm({
                       type="text"
                       id="outlined-read-only-input"
                       onChange={(e) => {
-                        console.log(onChange);
+                        // console.log(onChange);
                         onChange(e);
                       }}
                       fullWidth

@@ -122,6 +122,16 @@ app.get("/lesanalyses", (req, res) => {
     .catch((error) => console.log(error));
 });
 
+app.delete("/delete/analyse/:id", (req, res) => {
+  console.log(req.params.id);
+  connection
+    .deleteAnalyse(req.params.id)
+    .then((response) => {
+      res.send(response);
+    })
+    .catch((err) => res.send(err));
+});
+
 app.listen(port, () => {
   console.log(`app listening at http://localhost:${port}`);
 });
