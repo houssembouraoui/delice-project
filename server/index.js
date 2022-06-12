@@ -132,6 +132,13 @@ app.delete("/delete/analyse/:id", (req, res) => {
     .catch((err) => res.send(err));
 });
 
+app.get("/factures", (req, res) => {
+  connection
+    .getFactures()
+    .then((result) => res.send(result))
+    .catch((err) => res.send(err));
+});
+
 app.listen(port, () => {
   console.log(`app listening at http://localhost:${port}`);
 });
