@@ -23,8 +23,9 @@ import UsersTable from "./components/adminPages/usersTable.jsx";
 import UpdateUser from "./components/adminPages/updateUser.jsx";
 import NewAddUser from "./components/newAddUser.jsx";
 import AnalysePage from "./components/analyseAgent/analysePage.jsx";
-import InvoiceTemplate from "./components/invoiceTemplate.jsx";
-
+import InvoiceTemplate from "./components/facture/invoiceTemplate.jsx";
+import UpdateFacture from "./components/facture/updateFacture.jsx";
+import FactureList from "./components/facture/factureList.jsx";
 export const MyContext = React.createContext();
 
 const App = () => {
@@ -71,6 +72,8 @@ const App = () => {
           <Route exact path="/camion" element={<CamionPage />} />
           <Route exact path="/analysepage" element={<AnalysePage />} />
           <Route exact path="/invoice" element={<InvoiceTemplate />} />
+          <Route exact path="/invoice/update" element={<UpdateFacture />} />
+          <Route exact path="/invoice/list" element={<FactureList />} />
         </Routes>
       </MyContext.Provider>
     </>
