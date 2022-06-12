@@ -65,17 +65,44 @@ CREATE TABLE collier (
     id int NOT NULL AUTO_INCREMENT,
     code int NOT NULL,
     PRIMARY KEY (ID)
-)
+);
 
--- CREATE TABLE criteria (
---     temperature
---     densite
---     matiere 
---     waterPercent
---     acidity
---     ph 
---     alcohol
--- )
+CREATE TABLE lesAnalyses (
+    id int NOT NULL AUTO_INCREMENT,
+    humidite int NOT NULL,
+    Ph int NOT NULL,
+    densite int NOT NULL,
+    acidite int NOT NULL,
+    aspeect_couleur VARCHAR(50) NOT NULL,
+    matiere_grasse int NOT NULL,
+    etat VARCHAR(50) NOT NULL,
+    PRIMARY KEY (ID),
+    fournisseur_id int,
+    FOREIGN KEY (fournisseur_id) REFERENCES fournisseur(id)
+
+);
+
+CREATE TABLE lesFactures (
+    id int NOT NULL AUTO_INCREMENT,
+    immatricul int NOT NULL,
+    montant int NOT NULL,
+    date VARCHAR(250) NOT NULL,
+    PRIMARY KEY (ID),
+    fournisseur_id int,
+    FOREIGN KEY (fournisseur_id) REFERENCES fournisseur(id)
+
+);
+
+CREATE TABLE camion (
+    camionId int NOT NULL AUTO_INCREMENT,
+    vendorId int NOT NULL, 
+    registration varchar(50) NOT NULL,
+    warblerDate date NOT NULL,
+    quantity int not null,
+    PRIMARY KEY (camionId)
+);
+
+-- insert into lesAnalyses (humidite, ph, densite, acidite, aspeect_couleur, matiere_grasse, etat) values (1, 1, 1, 1, "aspect", "matiere", "etat", select id from fournisseur where id = 1)
 
 
 

@@ -4,6 +4,9 @@ const port = 5000;
 const path = require("path");
 const crypto = require("crypto");
 
+const cors = require("cors");
+app.use(cors());
+
 var connection = require("./database-mysql/index.js");
 const { adminLogIn } = require("./database-mysql/index.js");
 
@@ -34,6 +37,13 @@ app.get("/test", (request, response) => {
   response.send("hello world");
 });
 
+app.delete("/delete/fournisseur/:id", (req, res) => {
+  connection
+    .DeleteFr(req.params.id)
+    .then((res) => res.send(res))
+    .catch((err) => err);
+});
+
 app.get("/user/login", (req, res) => {
   // let recieved = req.query;
   connection.userLogIn(req, res).then((result) => {
@@ -44,6 +54,7 @@ app.get("/user/login", (req, res) => {
 });
 
 app.post("/new/user", (req, res) => {
+  console.log("sent");
   let password = crypto.randomBytes(20).toString("hex");
   let details = {
     from: "'delice' deliceproject6@gmail.com",
@@ -53,7 +64,6 @@ app.post("/new/user", (req, res) => {
     your default password is ${password}`,
   };
 
-  console.log(req.body);
   connection
     .createUser(req, password)
     .then((result) => {
@@ -78,6 +88,85 @@ app.post("/add/admin", (req, res) => {
     .addAdmin()
     .then((res) => console.log(res))
     .catch((err) => console.log("el fail"));
+});
+
+app.get("/fetch/fournisseurs", (req, res) => {
+  connection
+    .getFournissurs()
+    .then((result) => res.send(result))
+    .catch((err) => console.log(err));
+});
+
+app.get("/fetch/vendorSummary", (req, res) => { 
+  connection
+    .selectVendorSummaryListe()
+    .then((result) => res.send(result))
+    .catch((err) => console.log(err));
+});
+
+app.get("/fetch/CamionList", (req, res) => {
+  connection
+    .getCamionsList()
+    .then((result) => res.send(result))
+    .catch((err) => console.log(err));
+});
+app.get("/fetch/CamionById/:id", (req, res) => {
+  connection
+    .getCamionsById(req.params.id)
+    .then((result) => res.send(result))
+    .catch((err) => console.log(err));
+}); 
+
+app.post("/Add/Camion", (req, res) => {
+  connection
+    .addCamionInscription(req.body)
+    .then((result) => res.send(result))
+    .catch((err) => console.log(err));
+});
+
+app.delete("/delete/Camion/:id", (req, res) => {
+  connection
+    .deleteCamion(req.params.id)
+    .then((result) => res.status(200).json(result))
+    .catch((err) => res.json("error"));
+});
+
+app.put(`/update/Camion`, (req, res) => {
+  connection.updateCamion( req.body)
+  .then((result) => res.json(result)) })
+app.get("/users/:role", (req, res) => {
+  connection
+    .GetUsers(req.params.role)
+    .then((response) => res.send(response))
+    .catch((error) => console.log(error));
+});
+
+app.delete("/users/delete", (req, res) => {
+  connection
+    .deleteUser(req.query.role, req.query.id)
+    .then(() => res.send("success"));
+});
+
+app.put(`/users/update/:role`, (req, res) => {
+  console.log("updating");
+  connection.updateUser(req.params.role, req.body);
+});
+
+app.get("/lesanalyses", (req, res) => {
+  connection
+    .getAanalyses()
+    .then((response) => res.send(response))
+    .catch((error) => console.log(error));
+});
+
+app.delete("/delete/analyse/:id", (req, res) => {
+  console.log(req.params.id);
+  connection
+    .deleteAnalyse(req.params.id)
+    .then((response) => {
+      res.send(response);
+    })
+    .catch((err) => res.send(err));
 });
 
 app.listen(port, () => {
