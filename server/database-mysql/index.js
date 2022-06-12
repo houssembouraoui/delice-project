@@ -1,11 +1,12 @@
 const { Promise } = require("bluebird");
 const { append } = require("express/lib/response");
 const mysql = require("mysql");
+//syntax works for inserting with a foregn key
+// insert into lesAnalyses (humidite, ph, densite, acidite, aspeect_couleur, matiere_grasse, etat, fournisseur_id) values (1, 1, 1, 1, "aspect", 12, "etat",  1)
 
 var connection = mysql.createConnection({
   host: "localhost",
   user: "root",
-  port: 3306,
   password: "password",
   database: "milk",
   timezone: 'utc',
@@ -74,6 +75,35 @@ let DeleteFr = (id) => {
   return db.queryAsync(`DELETE FROM fournisseur WHERE id = ${id}`);
 };
 
+let GetUsers = (role) => {
+  console.log("request sent");
+  return db.queryAsync(`SELECT * FROM ${role}`).then((response) => response[0]);
+};
+
+let deleteUser = (role, id) => {
+  return db.queryAsync(`DELETE FROM ${role} WHERE id = ${id}`);
+};
+
+let updateUser = (role, body) => {
+  console.log(role, body, "request handling in the database");
+
+  return db.queryAsync(
+    `UPDATE analyse SET firstname = "${body.firstname}", lastname = "${body.lastname}", email = "${body.email}", image = "${body.image}", phonenumber = ${body.phonenumber} WHERE id = ${body.id};`
+  );
+};
+
+let getAanalyses = () => {
+  return db
+    .queryAsync(`SELECT * FROM lesAnalyses`)
+    .then((response) => response[0]);
+};
+
+let deleteAnalyse = (id) => {
+  console.log(id);
+  return db.queryAsync(`DELETE FROM lesAnalyses WHERE id = ${id}`);
+};
+
+
 let addCamionInscription = (data) => {
   const {vendorId,registration,warblerDate,quantity} = data
   return db.queryAsync( `INSERT INTO camion (vendorId, registration, warblerDate, quantity) VALUES ('${vendorId}', '${registration}', '${warblerDate}', '${quantity}')`
@@ -114,5 +144,10 @@ module.exports = {
   getCamionsList,
   deleteCamion,
   updateCamion,
-  getCamionsById
+  getCamionsById, 
+  GetUsers,
+  deleteUser,
+  updateUser,
+  getAanalyses,
+  deleteAnalyse,
 };

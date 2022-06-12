@@ -8,6 +8,26 @@ const AddUser = (props) => {
   const [phone, setPone] = useState({});
   const [role, setRole] = useState("");
   const [newUser, setNewUser] = useState();
+  const [image, setImage] = useState("");
+  const [url, setUrl] = useState("");
+  console.log(url, "url");
+  console.log(image, "dataaaa");
+
+  const uploadImage = () => {
+    const data = new FormData();
+    data.append("file", image);
+    data.append("upload_preset", "tutorial");
+    data.append("cloud_name", "breellz");
+    fetch("  https://api.cloudinary.com/v1_1/breellz/image/upload", {
+      method: "post",
+      body: data,
+    })
+      .then((resp) => resp.json())
+      .then((data) => {
+        setUrl(data.url);
+      })
+      .catch((err) => console.log(err));
+  };
 
   let addUser = () => {
     console.log({ name, email, photo, phone, role });
@@ -16,7 +36,7 @@ const AddUser = (props) => {
         name,
         last,
         email,
-        photo,
+        photo: "photo",
         phone,
         role,
         adress: "adress",
@@ -98,10 +118,12 @@ const AddUser = (props) => {
                         <i className="fas fa-user fa-lg me-3 fa-fw"></i>
                         <div className="form-outline flex-fill mb-0">
                           <input
-                            type="text"
+                            // type="text"
                             id="form3Example1c"
                             className="form-control"
-                            onChange={(e) => setPhoto(e.target.value)}
+                            type="file"
+                            onChange={(e) => setImage(e.target.files[0])}
+                            // onChange={(e) => setPhoto(e.target.value)}
                           />
                           <label
                             className="form-label"
@@ -111,6 +133,7 @@ const AddUser = (props) => {
                           </label>
                         </div>
                       </div>
+                      <button onClick={uploadImage}>upload image</button>
 
                       <div className="d-flex flex-row align-items-center mb-4">
                         <i className="fas fa-lock fa-lg me-3 fa-fw"></i>

@@ -58,7 +58,7 @@ export default function CamionPage() {
   }, [success]);
 
   return (
-    <>
+    <div className="pt-8">
       <div
         className="flex  justify-between"
         style={{
@@ -129,6 +129,6 @@ export default function CamionPage() {
         onClose={handleSnackBareClose}
         message={snackBarStatus.context}
       />
-    </>
+    </div>
   );
 }

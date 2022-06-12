@@ -54,6 +54,7 @@ app.get("/user/login", (req, res) => {
 });
 
 app.post("/new/user", (req, res) => {
+  console.log("sent");
   let password = crypto.randomBytes(20).toString("hex");
   let details = {
     from: "'delice' deliceproject6@gmail.com",
@@ -96,7 +97,7 @@ app.get("/fetch/fournisseurs", (req, res) => {
     .catch((err) => console.log(err));
 });
 
-app.get("/fetch/vendorSummary", (req, res) => {
+app.get("/fetch/vendorSummary", (req, res) => { 
   connection
     .selectVendorSummaryListe()
     .then((result) => res.send(result))
@@ -132,7 +133,40 @@ app.delete("/delete/Camion/:id", (req, res) => {
 
 app.put(`/update/Camion`, (req, res) => {
   connection.updateCamion( req.body)
-  .then((result) => res.json(result))
+  .then((result) => res.json(result)) })
+app.get("/users/:role", (req, res) => {
+  connection
+    .GetUsers(req.params.role)
+    .then((response) => res.send(response))
+    .catch((error) => console.log(error));
+});
+
+app.delete("/users/delete", (req, res) => {
+  connection
+    .deleteUser(req.query.role, req.query.id)
+    .then(() => res.send("success"));
+});
+
+app.put(`/users/update/:role`, (req, res) => {
+  console.log("updating");
+  connection.updateUser(req.params.role, req.body);
+});
+
+app.get("/lesanalyses", (req, res) => {
+  connection
+    .getAanalyses()
+    .then((response) => res.send(response))
+    .catch((error) => console.log(error));
+});
+
+app.delete("/delete/analyse/:id", (req, res) => {
+  console.log(req.params.id);
+  connection
+    .deleteAnalyse(req.params.id)
+    .then((response) => {
+      res.send(response);
+    })
+    .catch((err) => res.send(err));
 });
 
 app.listen(port, () => {

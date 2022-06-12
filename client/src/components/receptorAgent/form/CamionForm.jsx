@@ -3,7 +3,6 @@ import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import MenuItem from "@mui/material/MenuItem";
 import DialogContent from "@mui/material/DialogContent";
-import Alert from "@mui/material/Alert";
 import FormHelperText from "@mui/material/FormHelperText";
 import { DialogActions } from "@mui/material";
 import { useForm, Controller } from "react-hook-form";
@@ -24,7 +23,7 @@ export default function CamionForm({
   formContext,
   vendorSummary,
 }) {
-  const { initialValues, formIsReady, setFormIsReady } = useCamionForm({
+  const { initialValues } = useCamionForm({
     formContext,
     camionById,
   });
