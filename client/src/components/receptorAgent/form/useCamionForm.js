@@ -1,13 +1,17 @@
 import { useEffect, useState } from "react";
 
 export const prepareCamionFormPayload = (formOutPut) => {
-    console.log(formOutPut);
+    console.log(formOutPut, "formOutPut");
  return {
-
+    camionId: formOutPut.camionId,
+    vendorId : formOutPut.fournisseur,
+    registration : formOutPut.immatriculation,
+    warblerDate : formOutPut.date,
+    quantity : formOutPut.quantity
  }
 }
 
-const useCamionForm = ({formContext}) => {
+const useCamionForm = ({formContext, camionById}) => {
     const [formIsReady, setFormIsReady] = useState(false);
     const [initialValues, setInitialValues] = useState(
         {
@@ -18,37 +22,25 @@ const useCamionForm = ({formContext}) => {
         quantity: null,
         }
     )
-      const camionDatas = {
-        camionId : 1,
-        fournisseur: "ff",
-        immatriculation: "gg",
-        date: "2022-06-04",
-        quantity: 20,
-      }
+  
   const defineInitialValues = (formContext) => {
-   const camionInitialRawData = formContext ==="update" ? camionDatas : null;
+   const camionInitialRawData = formContext ==="update" ? camionById : null;
    return {
     camionId : camionInitialRawData?.camionId || null,
-    fournisseur:  camionInitialRawData?.fournisseur|| "",
-    immatriculation: camionInitialRawData?.immatriculation || "",
-    date: camionInitialRawData?.date || "",
-    quantity: camionInitialRawData?.quantity||null,
+    fournisseur:  camionInitialRawData?.vendorId|| "",
+    immatriculation: camionInitialRawData?.registration || "",
+    date: camionInitialRawData?.warblerDate?.slice(0,10) || "",
+    quantity: camionInitialRawData?.quantity||"",
    }
 
   }
 
-//   useEffect(()=> {
-//       if (formContext === "add") {
-//         setFormIsReady(true)
-//       } 
-//       formContext === "add" ? setFormIsReady(true) : setFormIsReady(false);
-//       formContext ==="update" ? setFormIsReady(true) : setFormIsReady(false)
-//   },[formIsReady, formContext, /* camionById */]) 
 
   useEffect(()=> {
-      const init = defineInitialValues(formContext, /*camionById  */)
+      const init = defineInitialValues(formContext,camionById )
       setInitialValues(init)
-  },[ formContext, /* camionById */, setInitialValues])
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  },[ formContext,  camionById , setInitialValues])
   return {initialValues, formIsReady, setFormIsReady}
 }
 

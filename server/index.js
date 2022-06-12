@@ -96,6 +96,45 @@ app.get("/fetch/fournisseurs", (req, res) => {
     .catch((err) => console.log(err));
 });
 
+app.get("/fetch/vendorSummary", (req, res) => {
+  connection
+    .selectVendorSummaryListe()
+    .then((result) => res.send(result))
+    .catch((err) => console.log(err));
+});
+
+app.get("/fetch/CamionList", (req, res) => {
+  connection
+    .getCamionsList()
+    .then((result) => res.send(result))
+    .catch((err) => console.log(err));
+});
+app.get("/fetch/CamionById/:id", (req, res) => {
+  connection
+    .getCamionsById(req.params.id)
+    .then((result) => res.send(result))
+    .catch((err) => console.log(err));
+}); 
+
+app.post("/Add/Camion", (req, res) => {
+  connection
+    .addCamionInscription(req.body)
+    .then((result) => res.send(result))
+    .catch((err) => console.log(err));
+});
+
+app.delete("/delete/Camion/:id", (req, res) => {
+  connection
+    .deleteCamion(req.params.id)
+    .then((result) => res.status(200).json(result))
+    .catch((err) => res.json("error"));
+});
+
+app.put(`/update/Camion`, (req, res) => {
+  connection.updateCamion( req.body)
+  .then((result) => res.json(result))
+});
+
 app.listen(port, () => {
   console.log(`app listening at http://localhost:${port}`);
 });
