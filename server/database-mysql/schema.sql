@@ -93,6 +93,15 @@ CREATE TABLE lesFactures (
 
 );
 
+CREATE TABLE camion (
+    camionId int NOT NULL AUTO_INCREMENT,
+    vendorId int NOT NULL, 
+    registration varchar(50) NOT NULL,
+    warblerDate date NOT NULL,
+    quantity int not null,
+    PRIMARY KEY (camionId)
+);
+
 -- insert into lesAnalyses (humidite, ph, densite, acidite, aspeect_couleur, matiere_grasse, etat) values (1, 1, 1, 1, "aspect", "matiere", "etat", select id from fournisseur where id = 1)
 
 

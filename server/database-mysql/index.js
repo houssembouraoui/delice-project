@@ -9,6 +9,7 @@ var connection = mysql.createConnection({
   user: "root",
   password: "password",
   database: "milk",
+  timezone: 'utc',
 });
 
 const db = Promise.promisifyAll(connection, { multiArgs: true });
@@ -57,6 +58,12 @@ let userLogIn = (req, res) => {
     });
 };
 
+let selectVendorSummaryListe = (req, res) => {
+  return db.queryAsync(`SELECT id,image,firstname,lastname from  fournisseur`)
+    .then((response) => {return response[0]})
+    .catch(err=> {return err});
+};
+
 let getFournissurs = (req, res) => {
   return db.queryAsync(`SELECT * FROM fournisseur`).then((response) => {
     return response[0];
@@ -102,6 +109,34 @@ let getFactures = () => {
     .then((response) => response[0]);
 };
 
+
+let addCamionInscription = (data) => {
+  const {vendorId,registration,warblerDate,quantity} = data
+  return db.queryAsync( `INSERT INTO camion (vendorId, registration, warblerDate, quantity) VALUES ('${vendorId}', '${registration}', '${warblerDate}', '${quantity}')`
+  )
+}
+
+let getCamionsList = (req, res) => {
+  return db.queryAsync(`SELECT c.camionId, c.registration, c.warblerDate, c.quantity,  a.id  AS vendorId, CONCAT_WS(" ", a.firstName, a.lastName) AS fullName , a.image AS vendorPhotoUrl FROM camion c, fournisseur a where a.Id = c
+  .vendorId`).then((response) => {
+    return response[0];
+  });
+};
+
+let deleteCamion = (id) => {
+  return db.queryAsync(`DELETE FROM camion WHERE camionId = ${id}`);
+};
+
+let updateCamion = (body) => {
+  return db.queryAsync(`UPDATE camion SET vendorId = "${body.fournisseur}", registration = "${body.immatriculation}", warblerDate = "${body.date}", quantity = "${body.quantity}" WHERE camionId = ${body.camionId};`);
+};
+
+let getCamionsById = (id) => {
+  return db.queryAsync(`SELECT c.camionId, c.registration, c.warblerDate, c.quantity,  a.id  AS vendorId, CONCAT_WS(" ", a.firstName, a.lastName) AS fullName , a.image AS vendorPhotoUrl FROM camion c, fournisseur a where a.Id = c
+  .vendorId and c.camionId=${id}`).then((response) => {
+    return response[0];
+  });
+};
 module.exports = {
   connection,
   adminLogIn,
@@ -110,6 +145,12 @@ module.exports = {
   userLogIn,
   getFournissurs,
   DeleteFr,
+  selectVendorSummaryListe,
+  addCamionInscription,
+  getCamionsList,
+  deleteCamion,
+  updateCamion,
+  getCamionsById, 
   GetUsers,
   deleteUser,
   updateUser,
